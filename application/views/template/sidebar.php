@@ -83,7 +83,7 @@
                 <ul class="treeview-menu">
                     <li><a href=""><i class="fa fa-circle-o"></i> Absensi Guru</a></li>
                     <li><a href="<?=base_url('absen_siswa')?>"><i class="fa fa-circle-o"></i> Absensi Siswa</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Rekap Absensi Siswa</a></li>
+                    <li><a href="<?=base_url('rekap_absen')?>"><i class="fa fa-circle-o"></i> Rekap Absensi Siswa</a></li>
                 </ul>
             </li>
             <li>
