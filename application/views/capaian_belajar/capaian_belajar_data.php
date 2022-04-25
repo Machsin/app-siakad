@@ -34,8 +34,6 @@
                     </div>
                     <form action="<?=base_url('capaian_belajar/simpan')?>" method="POST">
                         <div class="box-body">
-                            <input type="hidden" name="tahun" value="20151">
-                            <input type="hidden" name="kelas" value="X.MIPA.1">
                             <table id="example" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>

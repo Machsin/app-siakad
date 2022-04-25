@@ -15,14 +15,13 @@ class Capaian_Belajar extends CI_Controller
 
     public function index()
     {
-        // $data['capaian_belajar'] = $this->Capaian_Belajar_Model->tampilcapaianbelajar();
         $data['tahun'] = $this->Admin_Model->tampildata('tb_tahun_akademik', 'id_tahun_akademik');
         $data['kelas'] = $this->Admin_Model->tampildata('tb_kelas', 'kode_kelas');
         $data['idtahun'] = $this->input->post('tahun');
         $data['kodekelas'] = $this->input->post('kelas');
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
-        $this->load->view('Capaian_Belajar/Capaian_Belajar_data', $data);
+        $this->load->view('capaian_Belajar/capaian_Belajar_data', $data);
         $this->load->view('template/footer');
     }
     public function simpan()
