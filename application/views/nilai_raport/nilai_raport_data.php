@@ -64,7 +64,7 @@
                                         <center>
                                             <a class="btn btn-xs btn-warning" href="<?=base_url('nilai_raport/tambahsikap/'.$data->kodejdwl)?>"><span class="glyphicon glyphicon-th-list"></span> Sikap</a>
                                             <a class="btn btn-xs btn-success" href="<?=base_url('nilai_raport/tambahpengetahuan/'.$data->kodejdwl)?>"><span class="glyphicon glyphicon-th-list"></span> Pengetahuan</a>
-                                            <a class="btn btn-xs btn-primary" href="<?=base_url('nilai_raport/tambah/'.$data->kodejdwl)?>"><span class="glyphicon glyphicon-th-list"></span> Keterampilan</a>
+                                            <a class="btn btn-xs btn-primary" href="<?=base_url('nilai_raport/tambahketerampilan/'.$data->kodejdwl)?>"><span class="glyphicon glyphicon-th-list"></span> Keterampilan</a>
                                         </center>
                                         </td>
                                     </tr>

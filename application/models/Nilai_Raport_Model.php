@@ -31,4 +31,9 @@ class Nilai_Raport_Model extends CI_Model
         $query = $this->db->from('tb_nilai_pengetahuan')->where('kodejdwl', $kode)->get();
         return $query;
     }
+    public function tampilnilaiketerampilan($kode)
+    {
+        $query = $this->db->from('tb_nilai_keterampilan')->where('kodejdwl', $kode)->get();
+        return $query;
+    }
 }

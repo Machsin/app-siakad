@@ -53,6 +53,20 @@ class Nilai_Raport extends CI_Controller
         $this->load->view('nilai_raport/nilai_raport_pengetahuan', $data);
         $this->load->view('template/footer');
     }
+    public function tambahketerampilan($id)
+    {
+        $detail = $this->Nilai_Raport_Model->tampildata('', $id)->row();
+        $nilai_keterampilan = $this->Nilai_Raport_Model->tampilnilaiketerampilan($id);
+        $data = array(
+            'nilai_keterampilan'     => $nilai_keterampilan,
+            'detail'     => $detail,
+            'title'     => "Input Nilai Raport"
+        );
+        $this->load->view('template/header');
+        $this->load->view('template/sidebar');
+        $this->load->view('nilai_raport/nilai_raport_keterampilan', $data);
+        $this->load->view('template/footer');
+    }
     public function simpansikap()
     {
         $kodejdwl = $this->input->post('kodejdwl');
@@ -143,22 +157,6 @@ class Nilai_Raport extends CI_Controller
         $tambah = 0;
         for ($i = 0; $i < count($nisn); $i++) {
             if ($kd != null || $nilai1 != null || $nilai2 != null || $nilai3 != null || $nilai4 != null || $nilai5 != null || $deskripsi != null) {
-                $cek = $this->db->get_where('tb_nilai_pengetahuan', array('nisn' => $nisn[$i], 'kodejdwl' => $kodejdwl));
-                // if ($cek->num_rows() > 0) {
-                //     $data = array(
-                //         'kodejdwl' => $kodejdwl,
-                //         'nisn' => $nisn[$i],
-                //         'nilai1'  => $nilai1,
-                //         'nilai2'  => $nilai2,
-                //         'nilai3'  => $nilai3,
-                //         'nilai4'  => $nilai4,
-                //         'nilai5'  => $nilai5,
-                //         'deskripsi'  => $deskripsi,
-                //         'user_akses' => '1'
-                //     );
-                //     // $edit = $this->Admin_Model->editdata('tb_nilai_nilai_sikap', 'nisn', $nisn[$i], $data);
-                //     $edit = $this->db->where('nisn', $nisn[$i])->where('kodejdwl', $kodejdwl)->update('tb_nilai_pengetahuan', $data);
-                // } else {
                     $data = array(
                         'kodejdwl' => $kodejdwl,
                         'nisn' => $nisn[$i],
@@ -183,6 +181,46 @@ class Nilai_Raport extends CI_Controller
             redirect('nilai_raport/tambahpengetahuan/' . $kodejdwl);
         }
     }
+    public function simpanketerampilan()
+    {
+        $kodejdwl = $this->input->post('kodejdwl');
+        $nisn = $this->input->post('nisn');
+        $kd = $this->input->post('kd');
+        $nilai1 = $this->input->post('nilai1');
+        $nilai2 = $this->input->post('nilai2');
+        $nilai3 = $this->input->post('nilai3');
+        $nilai4 = $this->input->post('nilai4');
+        $nilai5 = $this->input->post('nilai5');
+        $nilai6 = $this->input->post('nilai6');
+        $deskripsi = $this->input->post('deskripsi');
+        $tambah = 0;
+        for ($i = 0; $i < count($nisn); $i++) {
+            if ($kd != null || $nilai1 != null || $nilai2 != null || $nilai3 != null || $nilai4 != null || $nilai5 != null || $nilai6 != null || $deskripsi != null) {
+                    $data = array(
+                        'kodejdwl' => $kodejdwl,
+                        'nisn' => $nisn[$i],
+                        'kd'  => $kd[$i],
+                        'nilai1'  => $nilai1[$i],
+                        'nilai2'  => $nilai2[$i],
+                        'nilai3'  => $nilai3[$i],
+                        'nilai4'  => $nilai4[$i],
+                        'nilai5'  => $nilai5[$i],
+                        'nilai6'  => $nilai6[$i],
+                        'deskripsi'  => $deskripsi[$i],
+                        'user_akses' => '1'
+                    );
+                    $tambah = $this->Admin_Model->simpandata('tb_nilai_keterampilan', $data);
+                // }
+            }
+        }
+        if ($tambah > 0 ) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+            redirect('nilai_raport/tambahketerampilan/' . $kodejdwl);
+        } else {
+            $this->session->set_flashdata('error', 'Data gagal disimpan');
+            redirect('nilai_raport/tambahketerampilan/' . $kodejdwl);
+        }
+    }
     public function hapuspengetahuan($id,$kodejdwl){
         $this->Admin_Model->hapusdata('tb_nilai_pengetahuan',$id,'id_nilai_pengetahuan');
         if ($this->db->affected_rows() > 0) {
@@ -191,6 +229,16 @@ class Nilai_Raport extends CI_Controller
         } else {
             $this->session->set_flashdata('error', 'Data gagal dihapus');
             redirect('nilai_raport/tambahpengetahuan/' . $kodejdwl);
+        }
+    }
+    public function hapusketerampilan($id,$kodejdwl){
+        $this->Admin_Model->hapusdata('tb_nilai_keterampilan',$id,'id_nilai_keterampilan');
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data berhasil dihapus');
+            redirect('nilai_raport/tambahketerampilan/' . $kodejdwl);
+        } else {
+            $this->session->set_flashdata('error', 'Data gagal dihapus');
+            redirect('nilai_raport/tambahketerampilan/' . $kodejdwl);
         }
     }
 }
