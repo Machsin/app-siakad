@@ -49,7 +49,11 @@ function getBulan($bln){
             return "Des";
             break;
     }
-} 
+}
+function average($arr){
+    if (!is_array($arr)) return false;
+    return array_sum($arr)/count($arr);
+ } 
 function indo_date($date)//2022-02-15
 {
     $d = substr($date, '8', '2');

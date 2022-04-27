@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini" onload="<?=$this->uri->segment(1)=='siswa' && $this->uri->segment(2)=='edit' ?'getkelas()':null?>">
+<body class="hold-transition skin-blue sidebar-mini <?=$this->uri->segment('1')=='nilai_raport'?'sidebar-collapse':null?>" onload="<?=$this->uri->segment(1)=='siswa' && $this->uri->segment(2)=='edit' ?'getkelas()':null?>">
     <div class="wrapper">
 
         <header class="main-header">

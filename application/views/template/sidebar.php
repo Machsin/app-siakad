@@ -106,7 +106,7 @@
                     <li><a href="<?=base_url('capaian_belajar')?>"><i class="fa fa-circle-o"></i> Data Capaian Belajar</a></li>
                     <li><a href="<?=base_url('extrakulikuler')?>"><i class="fa fa-circle-o"></i> Data Extrakulikuler</a></li>
                     <li><a href="<?=base_url('prestasi')?>"><i class="fa fa-circle-o"></i> Data Prestasi</a></li>
-                    <li><a href="<?=base_url('')?>"><i class="fa fa-circle-o"></i> Data Nilai Raport</a></li>
+                    <li><a href="<?=base_url('nilai_raport')?>"><i class="fa fa-circle-o"></i> Data Nilai Raport</a></li>
                     <li><a href="<?=base_url('')?>"><i class="fa fa-circle-o"></i> Cetak Raport</a></li>
                 </ul>
             </li>
