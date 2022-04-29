@@ -90,7 +90,7 @@ class Nilai_Raport extends CI_Controller
                         'negatif' => $spiritual_negatif[$i],
                         'deskripsi' => $spiritual_deskripsi[$i],
                         'status' => 'spiritual',
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     // $edit = $this->Admin_Model->editdata('tb_nilai_nilai_sikap', 'nisn', $nisn[$i], $data);
                     $edit = $this->db->where('nisn', $nisn[$i])->where('kodejdwl', $kodejdwl)->where('status', 'spiritual')->update('tb_nilai_sikap', $data);
@@ -102,7 +102,7 @@ class Nilai_Raport extends CI_Controller
                         'negatif' => $spiritual_negatif[$i],
                         'deskripsi' => $spiritual_deskripsi[$i],
                         'status' => 'spiritual',
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     $tambah = $this->Admin_Model->simpandata('tb_nilai_sikap', $data);
                 }
@@ -117,7 +117,7 @@ class Nilai_Raport extends CI_Controller
                         'negatif' => $sosial_negatif[$i],
                         'deskripsi' => $sosial_deskripsi[$i],
                         'status' => 'sosial',
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     // $edit = $this->Admin_Model->editdata('tb_nilai_nilai_sikap', 'nisn', $nisn[$i], $data);
                     $edit = $this->db->where('nisn', $nisn[$i])->where('kodejdwl', $kodejdwl)->where('status', 'sosial')->update('tb_nilai_sikap', $data);
@@ -129,7 +129,7 @@ class Nilai_Raport extends CI_Controller
                         'negatif' => $sosial_negatif[$i],
                         'deskripsi' => $sosial_deskripsi[$i],
                         'status' => 'sosial',
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     $tambah = $this->Admin_Model->simpandata('tb_nilai_sikap', $data);
                 }
@@ -167,7 +167,7 @@ class Nilai_Raport extends CI_Controller
                         'nilai4'  => $nilai4[$i],
                         'nilai5'  => $nilai5[$i],
                         'deskripsi'  => $deskripsi[$i],
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     $tambah = $this->Admin_Model->simpandata('tb_nilai_pengetahuan', $data);
                 // }
@@ -207,7 +207,7 @@ class Nilai_Raport extends CI_Controller
                         'nilai5'  => $nilai5[$i],
                         'nilai6'  => $nilai6[$i],
                         'deskripsi'  => $deskripsi[$i],
-                        'user_akses' => '1'
+                        'user_akses' => $this->session->userdata('nip')
                     );
                     $tambah = $this->Admin_Model->simpandata('tb_nilai_keterampilan', $data);
                 // }

@@ -88,7 +88,7 @@ class Jurnal extends CI_Controller
                 'jam_ke'  => $this->input->post('jam_ke'),
                 'materi'  => $this->input->post('materi'),
                 'keterangan'  => $this->input->post('keterangan'),
-                'users'  => '1',
+                'users'  => $this->session->userdata('nip'),
             );
             $this->Admin_Model->simpandata('tb_journal_list', $data);
             if ($this->db->affected_rows() > 0) {
@@ -106,7 +106,7 @@ class Jurnal extends CI_Controller
                 'jam_ke'  => $this->input->post('jam_ke'),
                 'materi'  => $this->input->post('materi'),
                 'keterangan'  => $this->input->post('keterangan'),
-                'users'  => '1',
+                'users'  => $this->session->userdata('nip'),
             );
             $this->Admin_Model->editdata('tb_journal_list', 'id_journal', $id, $data);
             if ($this->db->affected_rows() > 0) {

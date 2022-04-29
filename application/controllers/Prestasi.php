@@ -37,7 +37,7 @@ class Prestasi extends CI_Controller
             'kode_kelas' => $this->input->post('kelas'),
             'jenis_kegiatan' => $this->input->post('kegiatan'),
             'keterangan' => $this->input->post('keterangan'),
-            'user_akses' => '1',
+            'user_akses' => $this->session->userdata('nip'),
         );
         $this->Admin_Model->simpandata('tb_nilai_prestasi', $data);
         if ($this->db->affected_rows() > 0) {

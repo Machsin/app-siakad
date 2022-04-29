@@ -51,7 +51,7 @@ class Capaian_Belajar extends CI_Controller
                         'nisn'  => $nisn[$i],
                         'id_tahun_akademik'  => $idtahun,
                         'kode_kelas'  => $kodekelas,
-                        'user_akses' =>'1',
+                        'user_akses' =>$this->session->userdata('nip'),
                         'spiritual_predikat' => $spiritual_p[$i],
                         'spiritual_deskripsi' => $spiritual_d[$i],
                         'sosial_predikat' => $sosial_p[$i],

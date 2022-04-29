@@ -38,7 +38,7 @@ class Extrakulikuler extends CI_Controller
             'kegiatan' => $this->input->post('kegiatan'),
             'nilai' => $this->input->post('nilai'),
             'deskripsi' => $this->input->post('deskripsi'),
-            'user_akses' => '1',
+            'user_akses' => $this->session->userdata('nip'),
         );
         $this->Admin_Model->simpandata('tb_nilai_extrakulikuler', $data);
         if ($this->db->affected_rows() > 0) {

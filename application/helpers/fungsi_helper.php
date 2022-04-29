@@ -4,15 +4,17 @@ function indo_currency($nominal)
     $result = "Rp " . number_format($nominal, 2, ',', '.');
     return $result;
 }
-function tgl_indo($tgl){
-    $tanggal = substr($tgl,8,2);
-    $bulan = getBulan(substr($tgl,5,2));
-    $tahun = substr($tgl,0,4);
-    return $tanggal.' '.$bulan.' '.$tahun;		 
-}	
-function getBulan($bln){
-    switch ($bln){
-        case 1: 
+function tgl_indo($tgl)
+{
+    $tanggal = substr($tgl, 8, 2);
+    $bulan = getBulan(substr($tgl, 5, 2));
+    $tahun = substr($tgl, 0, 4);
+    return $tanggal . ' ' . $bulan . ' ' . $tahun;
+}
+function getBulan($bln)
+{
+    switch ($bln) {
+        case 1:
             return "Jan";
             break;
         case 2:
@@ -50,18 +52,67 @@ function getBulan($bln){
             break;
     }
 }
-function average($arr){
+function average($arr)
+{
     if (!is_array($arr)) return false;
-    return array_sum($arr)/count($arr);
- } 
-function indo_date($date)//2022-02-15
+    return array_sum($arr) / count($arr);
+}
+function indo_date($date) //2022-02-15
 {
     $d = substr($date, '8', '2');
     $m = substr($date, '5', '2');
     $y = substr($date, '0', '4');
     return $d . '-' . $m . '-' . $y;
 }
-function sql_date($date)//22/02/2022
+function tgl_raport($tgl)
+{
+    $tanggal = substr($tgl, 8, 2);
+    $bulan = getBulanraport(substr($tgl, 5, 2));
+    $tahun = substr($tgl, 0, 4);
+    return $tanggal . ' ' . $bulan . ' ' . $tahun;
+}
+function getBulanraport($bln)
+{
+    switch ($bln) {
+        case 1:
+            return "Januari";
+            break;
+        case 2:
+            return "Februari";
+            break;
+        case 3:
+            return "Maret";
+            break;
+        case 4:
+            return "April";
+            break;
+        case 5:
+            return "Mei";
+            break;
+        case 6:
+            return "Juni";
+            break;
+        case 7:
+            return "Juli";
+            break;
+        case 8:
+            return "Agustus";
+            break;
+        case 9:
+            return "September";
+            break;
+        case 10:
+            return "Oktober";
+            break;
+        case 11:
+            return "November";
+            break;
+        case 12:
+            return "Desember";
+            break;
+    }
+}
+function sql_date($date) //22/02/2022
 {
     $d = substr($date, '0', '2');
     $m = substr($date, '3', '2');
