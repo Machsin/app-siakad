@@ -195,7 +195,8 @@
                             <div style="clear:both"></div>
                             <div class="box-footer">
                                 <button type="submit" name="<?= $page ?>" class="btn btn-info"><?= $value ?></button>
-                                <a href="<?= base_url('guru') ?>"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                                <!-- <a href="<?= base_url('guru') ?>"><button type="button" class="btn btn-default pull-right">Cancel</button></a> -->
+                                <button type="button" onclick="window.history.go(-1)" class="btn btn-default pull-right">Cancel</button>
                             </div>
                         </form>
                     </div>

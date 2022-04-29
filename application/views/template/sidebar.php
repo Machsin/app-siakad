@@ -5,10 +5,13 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <?php $akun=$this->db->get_where('tb_guru',array('nip'=>$this->session->userdata('nip')))->row();?>
+                <img src="<?= base_url('assets/foto/guru/'.$akun->foto) ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>
+                <?= $akun->nama_guru;?>
+                </p>
                 <a href="<?= base_url('assets/') ?>#"><i class="fa fa-circle text-success"></i>Online</a>
             </div>
         </div>
@@ -53,7 +56,7 @@
                     <li><a href="<?= base_url("siswa") ?>"><i class="fa fa-circle-o"></i> Data Siswa</a></li>
                     <li><a href="<?= base_url("guru") ?>"><i class="fa fa-circle-o"></i> Data Guru</a></li>
                     <li><a href="<?= base_url("kepala_sekolah") ?>"><i class="fa fa-circle-o"></i> Data Kepala Sekolah</a></li>
-                    <li><a href="<?= base_url("") ?>"><i class="fa fa-circle-o"></i> Data Administrator</a></li>
+                    <li><a href="<?= base_url("administrator") ?>"><i class="fa fa-circle-o"></i> Data Administrator</a></li>
                 </ul>
             </li>
             <li class="treeview">

@@ -159,10 +159,27 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="col-md-5">
+                                    <h2>Akun </h2>
+                                    <table class="table table-condensed table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th width="150px" scope="row">Username</th>
+                                                <td><?=$akun->username?></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Level</th>
+                                                <td><?=$akun->level?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="<?=base_url('administrator/edit/'.$akun->id_administrator)?>" class="btn btn-primary"> Edit Akun</a>
+                                </div>
                             </form>
                         </div>
                         <div class="box-footer">
-                            <a href="<?= base_url('guru') ?>" class="btn btn-default">Kembali</a>
+                            <!-- <a href="<?= base_url('guru') ?>" class="btn btn-default">Kembali</a> -->
+                            <button onclick="window.history.go(-1)" class="btn btn-default">Kembali</button>
                         </div>
                     </div>
                 </div>

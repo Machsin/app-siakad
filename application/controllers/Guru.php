@@ -96,11 +96,14 @@ class Guru extends CI_Controller
     }
     public function detail($id)
     {
+        $id_administrator = $this->session->userdata('id_administrator');
+        $akun= $this->Admin_Model->formedit('tb_administrator','id_administrator',$id_administrator);
         $guru = $this->Guru_Model->tampildata($id)->row();
         $data = array(
             'title' => 'Detail Data Guru',
             'page' => 'detail',
             'guru' => $guru,
+            'akun' => $akun,
         );
         $this->load->view('template/header');
         $this->load->view('template/sidebar');

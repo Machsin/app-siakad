@@ -59,29 +59,30 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <?php $akun=$this->db->get_where('tb_guru',array('nip'=>$this->session->userdata('nip')))->row();?>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="<?= base_url('assets/') ?>#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <img src="<?= base_url('assets/foto/guru/'.$akun->foto) ?>" class="user-image" alt="User Image">
+                                <span class="hidden-xs"><?=$akun->nama_guru?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="<?= base_url('assets/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src="<?= base_url('assets/foto/guru/'.$akun->foto) ?>" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?=$akun->nama_guru?>
+                                        <small><?=$this->session->userdata('level')?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="<?= base_url('assets/') ?>#" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="<?= base_url('guru/detail/'.$akun->nip) ?>" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="<?= base_url('assets/') ?>#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="<?= base_url('login/logout') ?>" class="btn btn-danger btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
