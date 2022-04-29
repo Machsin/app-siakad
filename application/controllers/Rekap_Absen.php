@@ -8,9 +8,9 @@ class Rekap_Absen extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['Admin_Model', 'Rekap_Absen_Model']);
-        // if (empty($this->session->userdata('username')) and empty($this->session->userdata('password'))) {
-        //     redirect('login');
-        // }
+        if (empty($this->session->userdata('username')) and empty($this->session->userdata('password'))) {
+            redirect('login');
+        }
     }
 
     public function index()
