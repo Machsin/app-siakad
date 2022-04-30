@@ -66,9 +66,9 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li class="<?= $this->uri->segment(1) == 'absen_guru' ?>"><a href="<?= base_url('absen_guru') ?>"><i class="fa fa-circle-o"></i> Absensi Guru</a></li>
-            <li class="<?= $this->uri->segment(1) == 'absen_siswa' ?>"><a href="<?= base_url('absen_siswa') ?>"><i class="fa fa-circle-o"></i> Absensi Siswa</a></li>
-            <li class="<?= $this->uri->segment(1) == 'rekap_absen' ?>"><a href="<?= base_url('rekap_absen') ?>"><i class="fa fa-circle-o"></i> Rekap Absensi Siswa</a></li>
+            <li class="<?= $this->uri->segment(1) == 'absen_guru' ?'active':null?>"><a href="<?= base_url('absen_guru') ?>"><i class="fa fa-circle-o"></i> Absensi Guru</a></li>
+            <li class="<?= $this->uri->segment(1) == 'absen_siswa'?'active':null ?>"><a href="<?= base_url('absen_siswa') ?>"><i class="fa fa-circle-o"></i> Absensi Siswa</a></li>
+            <li class="<?= $this->uri->segment(1) == 'rekap_absen'?'active':null ?>"><a href="<?= base_url('rekap_absen') ?>"><i class="fa fa-circle-o"></i> Rekap Absensi Siswa</a></li>
         </ul>
     </li>
     <li class="<?= $this->uri->segment(1) == 'jurnal' ? 'active' : null ?>">
@@ -77,7 +77,7 @@
             <span>Jurnal KBM</span>
         </a>
     </li>
-    <li class="treeview <?= $this->uri->segment(1) == 'nilai_uts' || $this->uri->segment(1) == 'capaian_belajar' || $this->uri->segment(1) == 'extrakulikuler' || $this->uri->segment(1) == 'prestasi' || $this->uri->segment(1) == 'nilai_raport'||$this->uri->segment(1) == 'cetak_raport' ? 'active menu-open' : null ?>">
+    <li class="treeview <?= $this->uri->segment(1) == 'nilai_uts' || $this->uri->segment(1) == 'capaian_belajar' || $this->uri->segment(1) == 'extrakulikuler' || $this->uri->segment(1) == 'prestasi' || $this->uri->segment(1) == 'nilai_raport'||$this->uri->segment(1) == 'cetak_raport'||$this->uri->segment(1) == 'catatan'||$this->uri->segment(1) == 'pkl' ? 'active menu-open' : null ?>">
         <a href="<?= base_url('assets/') ?>#">
             <i class="fa fa-calendar"></i>
             <span>Laporan Nilai</span>
@@ -91,6 +91,8 @@
             <li class="<?= $this->uri->segment(1) == 'capaian_belajar' ? 'active' : null ?>"><a href="<?= base_url('capaian_belajar') ?>"><i class="fa fa-circle-o"></i> Data Capaian Belajar</a></li>
             <li class="<?= $this->uri->segment(1) == 'extrakulikuler' ? 'active' : null ?>"><a href="<?= base_url('extrakulikuler') ?>"><i class="fa fa-circle-o"></i> Data Extrakulikuler</a></li>
             <li class="<?= $this->uri->segment(1) == 'prestasi' ? 'active' : null ?>"><a href="<?= base_url('prestasi') ?>"><i class="fa fa-circle-o"></i> Data Prestasi</a></li>
+            <li class="<?= $this->uri->segment(1) == 'catatan' ? 'active' : null ?>"><a href="<?= base_url('catatan') ?>"><i class="fa fa-circle-o"></i> Data Catatan Akademik</a></li>
+            <li class="<?= $this->uri->segment(1) == 'pkl' ? 'active' : null ?>"><a href="<?= base_url('pkl') ?>"><i class="fa fa-circle-o"></i> Data PKL</a></li>
             <li class="<?= $this->uri->segment(1) == 'nilai_raport' ? 'active' : null ?>"><a href="<?= base_url('nilai_raport') ?>"><i class="fa fa-circle-o"></i> Data Nilai Raport</a></li>
             <li class="<?= $this->uri->segment(1) == 'cetak_raport' ? 'active' : null ?>"><a href="<?= base_url('cetak_raport') ?>"><i class="fa fa-circle-o"></i> Cetak Raport</a></li>
         </ul>

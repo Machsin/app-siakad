@@ -128,10 +128,10 @@ $header = "<table>
                 <br>
                 <strong>A. Nilai Akademik</strong>
                 <br>
-                <table id="cetak" width="100%">
+                <table id="cetak" style="width: 100%">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th width="20px">No</th>
                             <th width="250px">Mata Pelajaran</th>
                             <th>Pengetahuan</th>
                             <th>Keterampilan</th>
@@ -183,6 +183,167 @@ $header = "<table>
                 <br>
                 <strong>B. Catatan Akademik</strong>
                 <br>
+                <table id="cetak" style="width: 100%">
+                    <tr>
+                        <td>
+                            <?php
+                            $catatan = $this->db->get_where('tb_catatan_akademik', array('id_tahun_akademik' => $tahun->id_tahun_akademik, 'nisn' => $siswa->nisn, 'kode_kelas' => $siswa->kode_kelas));
+                            if ($catatan->num_rows() > 0) {
+                                $catatan = $catatan->row();
+                            } else {
+                                $catatan = new stdClass();
+                                $catatan->catatan = null;
+                            }
+                            echo $catatan->catatan;
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="page">
+            <div class="subpage">
+                <?= $header ?>
+                <br>
+                <br>
+                <strong>C. Praktik Kerja Lapangan</strong>
+                <br>
+                <table id="cetak" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th width="20px">No.</th>
+                            <th align="center">Mitra DU/DI</th>
+                            <th align="center">Lokasi</th>
+                            <th align="center">Lamanya(Bulan)</th>
+                            <th align="center">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $pkl = $this->db->from('tb_pkl')->where('id_tahun_akademik', $tahun->id_tahun_akademik)->where('nisn', $siswa->nisn)->where('kode_kelas', $siswa->kode_kelas)->get();
+                        foreach ($pkl->result() as $data) {
+                        ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $data->mitra ?></td>
+                                <td><?= $data->lokasi ?></td>
+                                <td><?= $data->lama ?></td>
+                                <td><?= $data->keterangan ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <strong>D. Extrakurikuler</strong>
+                <br>
+                <table id="cetak" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th width="20px">No.</th>
+                            <th align="center">Kegiatan Extrakurikuler</th>
+                            <th align="center">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $extrakurikuler = $this->db->from('tb_nilai_extrakulikuler')->where('id_tahun_akademik', $tahun->id_tahun_akademik)->where('nisn', $siswa->nisn)->where('kode_kelas', $siswa->kode_kelas)->get();
+                        foreach ($extrakurikuler->result() as $data) {
+                        ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $data->kegiatan ?></td>
+                                <td><?= $data->deskripsi ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <strong>E. Ketidakhadiran</strong>
+                <br>
+                <table id="cetak" style="width: 60%;">
+                    <tbody>
+                        <?php
+                        $jadwal_mapel = $this->db->from('tb_jadwal_pelajaran')->where('id_tahun_akademik', $tahun->id_tahun_akademik)->get();
+                        $tsakit = 0;
+                        $tijin = 0;
+                        $talpa = 0;
+                        foreach ($jadwal_mapel->result() as $j) {
+                            $sakit = $this->db->from('tb_absensi_siswa')->where('kodejdwl', $j->kodejdwl)->where('nisn', $siswa->nisn)->where('kode_kehadiran', 'S')->get()->num_rows();
+                            $tsakit = $tsakit + $sakit;
+                            $ijin = $this->db->from('tb_absensi_siswa')->where('kodejdwl', $j->kodejdwl)->where('nisn', $siswa->nisn)->where('kode_kehadiran', 'I')->get()->num_rows();
+                            $tijin = $tijin + $ijin;
+                            $alpa = $this->db->from('tb_absensi_siswa')->where('kodejdwl', $j->kodejdwl)->where('nisn', $siswa->nisn)->where('kode_kehadiran', 'A')->get()->num_rows();
+                            $talpa = $talpa + $alpa;
+                        }
+                        ?>
+                        <tr>
+                            <td>Sakit</td>
+                            <td>:</td>
+                            <td><?= $tsakit ?> hari</td>
+                        </tr>
+                        <tr>
+                            <td>Ijin</td>
+                            <td>:</td>
+                            <td><?= $tijin ?> hari</td>
+                        </tr>
+                        <tr>
+                            <td>Tanpa Keterangan</td>
+                            <td>:</td>
+                            <td><?= $talpa ?> hari</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 40%;vertical-align: baseline;">Orang Tua/Wali,
+                        <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            __________________
+                        </td>
+                        <td></td>
+                        <td style="width: 40%;">
+                            Lumajang, <?= tgl_raport(date('Y-m-d')) ?> <br>
+                            Wali Kelas
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <?php
+                            $kelas = $this->db->get_where('tb_kelas', array('kode_kelas' => $siswa->kode_kelas))->row();
+                            $guru = $this->db->get_where('tb_guru', array('nip' => $kelas->nip))->row();
+                            ?>
+                            <u><?= $guru->nama_guru ?></u> <br>
+                            <?= $guru->niy_nigk ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><br></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="center">
+                            Mengetahui <br>
+                            Kepala Sekolah,
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <u><?= $kepala->nama_kepala_sekolah ?></u><br>
+                            <?= $kepala->niy_nigk ?>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

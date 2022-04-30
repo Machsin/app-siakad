@@ -16,7 +16,7 @@
                     <div class="box-header with-border">
                         <?php $this->view('pesan') ?>
                         <h3 class="box-title">Rekap Absensi Siswa</h3>
-                        <form style='margin-right:5px; margin-top:0px' class='pull-right' action='<?= base_url('absen_siswa') ?>' method='POST'>
+                        <form style='margin-right:5px; margin-top:0px' class='pull-right' action='<?= base_url('rekap_absen') ?>' method='POST'>
                             <select name='tahun' style='padding:4px'>
                                 <option value=''>- Pilih Tahun Akademik -</option>
                                 <?php foreach ($tahun->result() as $data) { ?>

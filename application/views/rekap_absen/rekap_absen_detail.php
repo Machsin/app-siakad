@@ -61,16 +61,20 @@
                                     <?php
                                     $query = $this->db->from('tb_siswa')->where('kode_kelas', $detail->kode_kelas)->get();
                                     $no = 1;
+                                    $tpertemuan='0';
                                     foreach ($query->result() as $data) {
                                         $cek_absen = $this->db->get_where('tb_absensi_siswa', array('nisn' => $data->nisn, 'kodejdwl' => $detail->kodejdwl));
                                         if ($cek_absen->num_rows() > 0) {
                                             $absen = $cek_absen->row();
-                                            $pertemuan = $this->db->query("SELECT * FROM `tb_absensi_siswa` where kodejdwl='$detail->kodejdwl' GROUP BY tanggal")->num_rows();
+                                            $pertemuan = $this->db->query("SELECT * FROM `tb_absensi_siswa` where kodejdwl='$detail->kodejdwl' GROUP BY tanggal");
                                             $hadir = $this->db->get_where('tb_absensi_siswa', array('nisn' => $data->nisn, 'kodejdwl' => $detail->kodejdwl, 'kode_kehadiran' => 'H'))->num_rows();
                                             $sakit = $this->db->get_where('tb_absensi_siswa', array('nisn' => $data->nisn, 'kodejdwl' => $detail->kodejdwl, 'kode_kehadiran' => 'I'))->num_rows();
                                             $izin = $this->db->get_where('tb_absensi_siswa', array('nisn' => $data->nisn, 'kodejdwl' => $detail->kodejdwl, 'kode_kehadiran' => 'S'))->num_rows();
                                             $alpa = $this->db->get_where('tb_absensi_siswa', array('nisn' => $data->nisn, 'kodejdwl' => $detail->kodejdwl, 'kode_kehadiran' => 'A'))->num_rows();
-                                            $kehadiran = $hadir / ($pertemuan)*100;
+                                            if($pertemuan->num_rows() > 0){
+                                                $tpertemuan = $pertemuan->num_rows();
+                                            }
+                                            $kehadiran = $hadir / ($tpertemuan)*100;
                                         } else {
                                             $hadir = "0";
                                             $sakit = "0";
@@ -84,7 +88,7 @@
                                             <td><?= $data->nisn ?></td>
                                             <td><?= $data->nama ?></td>
                                             <td><?= $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' ?></td>
-                                            <td align="center"><?= $pertemuan ?></td>
+                                            <td align="center"><?= $tpertemuan ?></td>
                                             <td align="center"><?= $hadir ?></td>
                                             <td align="center"><?= $sakit ?></td>
                                             <td align="center"><?= $izin ?></td>
