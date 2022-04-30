@@ -2,7 +2,7 @@
 
 <head>
     <title>Cover Raport Siswa</title>
-    <link rel="icon" href="<?=base_url('assets/logo.png')?>" type="image/x-icon" />
+    <link rel="icon" href="<?= base_url('assets/logo.png') ?>" type="image/x-icon" />
     <!-- <link rel="stylesheet" href="../bootstrap/css/printer.css"> -->
     <style type="text/css">
         /* Kode CSS Untuk PAGE ini dibuat oleh http://jsfiddle.net/2wk6Q/1/ */
@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             background-color: #FFFF;
-            font: 12pt "Arial";
+            font: 11pt "Times New Roman";
         }
 
         * {
@@ -23,7 +23,7 @@
         .page {
             width: 210mm;
             min-height: 297mm;
-            padding: 20mm;
+            padding: 0 20mm;
             margin: 10mm auto;
             border: 1px #FFF solid;
             border-radius: 5px;
@@ -32,7 +32,7 @@
         }
 
         .subpage {
-            padding: 1cm;
+            padding: 2mm;
             /* border: 5px red solid; */
             height: 257mm;
             outline: 2cm #FFF solid;
@@ -74,274 +74,115 @@
             padding-bottom: 2px;
             padding-right: 5px;
         }
+
+        #cetak {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #cetak td,
+        #cetak th {
+            border: 1px solid #000;
+            padding: 5px;
+        }
     </style>
 </head>
 
-<body onload="window.print()">
+<?php
+$kelas = $this->db->get_where('tb_kelas', array('kode_kelas' => $siswa->kode_kelas))->row();
+$header = "<table>
+    <tr>
+        <td>Nama Peserta Didik</td>
+        <td>:</td>
+        <td>$siswa->nama</td>
+    </tr>
+    <tr>
+        <td>Nomor Induk/NISN</td>
+        <td>:</td>
+        <td>$siswa->nisn</td>
+    </tr>
+    <tr>
+        <td>Kelas</td>
+        <td>:</td>
+        <td>$kelas->nama_kelas</td>
+    </tr>
+    <tr>
+        <td>Tahun Pelajaran</td>
+        <td>:</td>
+        <td>$tahun->keterangan</td>
+    </tr>
+    <tr>
+        <td>Semester</td>
+        <td>:</td>
+        <td>$tahun->nama_tahun</td>
+    </tr>
+</table>";
+?>
+
+<body>
     <div class="book">
         <div class="page">
             <div class="subpage">
-                <h2 align=center>RAPOR PESERTA DIDIK <br>SEKOLAH MENENGAH KEJURUAN <br> (SMK)</h2><br><br><br><br>
-                <center>
-                    <img width='170px' src='<?= base_url('assets/') ?>logo.png'><br><br><br><br><br><br>
-                    <h3>Nama Peserta Didik :<br></h3>
-                    <p style='border:1px solid #000; width:50%; padding:6px'><?= $siswa->nama; ?></p><br><br>
-
-                    <h3>NISN :<br></h3>
-                    <p style='border:1px solid #000; width:50%; padding:3px'><?= $siswa->nisn; ?></p><br><br><br><br><br><br>
-
-                    <h3 style='font-size:22px'>KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN <br>REPUBLIK INDONESIA</h3>
-                </center>
-            </div>
-        </div>
-
-        <div class="page">
-            <div class="subpage">
-                <h2 align=center>RAPOR PESERTA DIDIK <br>SEKOLAH MENENGAH KEJURUAN <br> (SMK)</h2><br><br><br><br>
-                <table style="width: 100%;" class="rapor">
-                    <tr>
-                        <td>Nama Sekolah</td>
-                        <td>:</td>
-                        <td><?= $sekolah->nama_sekolah ?></td>
-                    </tr>
-                    <tr>
-                        <td>NPSN</td>
-                        <td>:</td>
-                        <td><?= $sekolah->npsn ?></td>
-                    </tr>
-                    <tr>
-                        <td>NIS/NSS/NDS</td>
-                        <td>:</td>
-                        <td><?= $sekolah->nss ?></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat Sekolah</td>
-                        <td>:</td>
-                        <td><?= $sekolah->alamat_sekolah ?> <br> <?php echo " Kode Pos $sekolah->kode_pos Telp $sekolah->no_telpon" ?></td>
-                    </tr>
-                    <tr>
-                        <td>Kelurahan</td>
-                        <td>:</td>
-                        <td><?= $sekolah->kelurahan ?></td>
-                    </tr>
-                    <tr>
-                        <td>Kecamatan</td>
-                        <td>:</td>
-                        <td><?= $sekolah->kecamatan ?></td>
-                    </tr>
-                    <tr>
-                        <td>Kota/Kabupaten</td>
-                        <td>:</td>
-                        <td><?= $sekolah->kabupaten_kota ?></td>
-                    </tr>
-                    <tr>
-                        <td>Provinsi</td>
-                        <td>:</td>
-                        <td><?= $sekolah->provinsi ?></td>
-                    </tr>
-                    <tr>
-                        <td>Website</td>
-                        <td>:</td>
-                        <td><?= $sekolah->website ?></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail</td>
-                        <td>:</td>
-                        <td><?= $sekolah->email ?></td>
-                    </tr>
+                <?= $header ?>
+                <br>
+                <br>
+                <strong>A. Nilai Akademik</strong>
+                <br>
+                <table id="cetak" width="100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th width="250px">Mata Pelajaran</th>
+                            <th>Pengetahuan</th>
+                            <th>Keterampilan</th>
+                            <th>Nilai Akhir</th>
+                            <th>Predikat</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    $no = 1;
+                    $kelompok_mapel = $this->db->from('tb_kelompok_mapel')->order_by('id_kelompok_mapel', 'ASC')->get();
+                    foreach ($kelompok_mapel->result() as $data) {
+                    ?>
+                        <thead>
+                            <tr>
+                                <th colspan="6" align="left"><?= $data->jenis_kelompok_mapel . '. ' . $data->nama_kelompok_mapel ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $mapel = $this->db->from('tb_mata_pelajaran')->where('id_kelompok_mata_pelajaran', $data->id_kelompok_mapel)->order_by('urutan', 'ASC')->get();
+                            foreach ($mapel->result() as $m) {
+                            ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $m->namamatapelajaran ?></td>
+                                    <?php
+                                    $jadwal_mapel = $this->db->get_where('tb_jadwal_pelajaran', array('id_tahun_akademik' => $tahun->id_tahun_akademik, 'kode_kelas' => $siswa->kode_kelas, 'kode_pelajaran' => $m->kode_pelajaran));
+                                    if ($jadwal_mapel->num_rows() > 0) {
+                                        $jadwal_mapel = $jadwal_mapel->row();
+                                    } else {
+                                        $jadwal_mapel = new stdClass();
+                                        $jadwal_mapel->kodejdwl = null;
+                                    }
+                                    $rapnp = $this->db->query("SELECT sum((nilai1+nilai2+nilai3+nilai4+nilai5)/5)/count($siswa->nisn) as raport FROM tb_nilai_pengetahuan where kodejdwl='$jadwal_mapel->kodejdwl' AND nisn='$siswa->nisn'")->row();
+                                    $rapnt = $this->db->query("SELECT sum((nilai1+nilai2+nilai3+nilai4+nilai5+nilai6)/6)/count($siswa->nisn) as raport FROM tb_nilai_keterampilan where kodejdwl='$jadwal_mapel->kodejdwl' AND nisn='$siswa->nisn'")->row();
+                                    $nakhir = ($rapnp->raport + $rapnt->raport) / 2;
+                                    $predikat = $this->db->query("SELECT * FROM `tb_predikat` WHERE " . number_format($nakhir) . " >= nilai_a && " . number_format($nakhir) . " <= nilai_b;")->row();
+                                    ?>
+                                    <td align="center"><?= number_format($rapnp->raport) ?></td>
+                                    <td align="center"><?= number_format($rapnt->raport) ?></td>
+                                    <td align="center"><?= number_format($nakhir) ?></td>
+                                    <td align="center"><?= $predikat->grade ?></td>
+                                </tr>
+                        </tbody>
+                <?php }
+                        } ?>
                 </table>
-            </div>
-        </div>
-
-        <div class="page">
-            <div class="subpage">
-                <h3 align=center>KETERANGAN TENTANG DIRI PESERTA DIDIK</h3>
-                <table style="width: 100%;" class="tentang">
-                    <tr>
-                        <td>1.</td>
-                        <td style="width: 45%">Nama Peserta Didik (Lengkap)</td>
-                        <td>:</td>
-                        <td><?= $siswa->nama ?></td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td>Nomor Induk/NISN</td>
-                        <td>:</td>
-                        <td><?= $siswa->nisn ?></td>
-                    </tr>
-                    <tr>
-                        <td>3.</td>
-                        <td>Tempat, Tanggal Lahir</td>
-                        <td>:</td>
-                        <td><?= $siswa->tempat_lahir . ", " . tgl_raport($siswa->tanggal_lahir) ?></td>
-                    </tr>
-                    <tr>
-                        <td>4.</td>
-                        <td>Jenis Kelamin</td>
-                        <td>:</td>
-                        <td><?= $siswa->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan' ?></td>
-                    </tr>
-                    <tr>
-                        <td>5.</td>
-                        <td>Agama/Kepercayaan</td>
-                        <td>:</td>
-                        <td><?= $siswa->agama ?></td>
-                    </tr>
-                    <tr>
-                        <td>6.</td>
-                        <td>Status dalam Keluarga</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>7.</td>
-                        <td>Anak ke</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>8.</td>
-                        <td>Alamat Peserta Didik</td>
-                        <td>:</td>
-                        <td rowspan="4"><?php echo "$siswa->dusun RT:$siswa->rt RW:$siswa->rw, Kel. $siswa->kelurahan, Kec. $siswa->kecamatan" ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>9.</td>
-                        <td>Nomor Telepon Rumah</td>
-                        <td>:</td>
-                        <td><?= $siswa->no_telpon_ayah ?></td>
-                    </tr>
-                    <tr>
-                        <td>10.</td>
-                        <td>Sekolah Asal</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>11.</td>
-                        <td>Diterima di sekolah ini</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Di Kelas</td>
-                        <td>:</td>
-                        <td><?php $kelas = $this->db->get_where('tb_kelas', array('kode_kelas' => $siswa->kode_kelas))->row();
-                            echo $kelas->nama_kelas ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Pada Tanggal</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Nama Orang Tua</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>a. Ayah</td>
-                        <td>:</td>
-                        <td><?= $siswa->nama_ayah ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>b. Ibu</td>
-                        <td>:</td>
-                        <td><?= $siswa->nama_ibu ?></td>
-                    </tr>
-                    <tr>
-                        <td>12.</td>
-                        <td>Alamat Orang Tua</td>
-                        <td>:</td>
-                        <td rowspan="4"><?php echo "$siswa->dusun RT:$siswa->rt RW:$siswa->rw, Kel. $siswa->kelurahan, Kec. $siswa->kecamatan" ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Nomor Telepon Rumah</td>
-                        <td>:</td>
-                        <td><?= $siswa->no_telpon_ayah ?></td>
-                    </tr>
-                    <tr>
-                        <td>13.</td>
-                        <td>Pekerjaan Orang Tua</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>a. Ayah</td>
-                        <td>:</td>
-                        <td><?= $siswa->pekerjaan_ayah ?></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>b. Ibu</td>
-                        <td>:</td>
-                        <td><?= $siswa->pekerjaan_ibu ?></td>
-                    </tr>
-                    <tr>
-                        <td>14.</td>
-                        <td>Nama Wali Peserta Didik</td>
-                        <td>:</td>
-                        <td><?= $siswa->nama_wali ?></td>
-                    </tr>
-                    <tr>
-                        <td>15.</td>
-                        <td>Alamat Wali Peserta Didik</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Nomor Telepon Rumah</td>
-                        <td>:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>16.</td>
-                        <td>Pekerjaan Wali Peserta Didik</td>
-                        <td>:</td>
-                        <td><?= $siswa->pekerjaan_wali ?></td>
-                    </tr>
-                    <tr style="height: 50px;">
-                        <td colspan="4"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td rowspan="3"><img src="<?= base_url('assets/foto/siswa' . $siswa->foto) ?>" width="113px"></td>
-                        <td></td>
-                        <td style="vertical-align: baseline;">Lumajang, <?php echo date('d') . tgl_raport(date('dmY')) ?><br>Kepala Sekolah,</td>
-                    </tr>
-                    <tr style="height: 80px;">
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td style="vertical-align: bottom;"><?php echo "<u><b>" . strtoupper($kepala->nama_kepala_sekolah) . "</b></u>" ?><br>NIY. <?= $kepala->niy_nigk ?></td>
-                        <!-- <td></td> -->
-                    </tr>
-                </table>
+                <br>
+                <br>
+                <strong>B. Catatan Akademik</strong>
+                <br>
             </div>
         </div>
     </div>

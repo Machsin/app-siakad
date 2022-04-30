@@ -29,6 +29,20 @@ class Cetak_Raport extends CI_Controller
         $this->load->view('cetak/cetak_raport_data', $data);
         $this->load->view('template/footer');
     }
+    public function cetak_cover($idtahun, $idsiswa)
+    {
+        $tahun = $this->Admin_Model->formedit('tb_tahun_akademik','id_tahun_akademik',$idtahun);
+        $siswa = $this->Admin_Model->formedit('tb_siswa','id_siswa',$idsiswa);
+        $sekolah = $this->Admin_Model->formedit('tb_identitas_sekolah','id_identitas_sekolah','1');
+        $kepala = $this->db->query('SELECT * FROM tb_kepala_sekolah LIMIT 1')->row();
+        $data = array(
+            'tahun' => $tahun,
+            'siswa' => $siswa,
+            'sekolah' => $sekolah,
+            'kepala' => $kepala,
+        );
+        $this->load->view('cetak/cetak_raport_cover',$data);
+    }
     public function cetak($idtahun, $idsiswa)
     {
         $tahun = $this->Admin_Model->formedit('tb_tahun_akademik','id_tahun_akademik',$idtahun);

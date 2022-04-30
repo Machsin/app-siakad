@@ -59,8 +59,8 @@
                                             <td><?= $data->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan' ?></td>
                                             <td width="420px">
                                                 <center>
-                                                    <a target="_BLANK" class="btn btn-success btn-xs" href="<?=base_url('cetak_raport/cetak/'.$idtahun.'/'.$data->id_siswa)?>"><span class="glyphicon glyphicon-print"></span> Cover</a>
-                                                    <a target="_BLANK" class="btn btn-success btn-xs" href="print_raport/print-hal1.php?id=9991268756&amp;kelas=X.MIPA.1&amp;tahun=20161"><span class="glyphicon glyphicon-print"></span> Hal 1</a>
+                                                    <a target="_BLANK" class="btn btn-success btn-xs" href="<?=base_url('cetak_raport/cetak_cover/'.$idtahun.'/'.$data->id_siswa)?>"><span class="glyphicon glyphicon-print"></span> Cover</a>
+                                                    <a target="_BLANK" class="btn btn-success btn-xs" href="<?=base_url('cetak_raport/cetak/'.$idtahun.'/'.$data->id_siswa)?>"><span class="glyphicon glyphicon-print"></span> Raport</a>
                                                 </center>
                                             </td>
                                         </tr>
